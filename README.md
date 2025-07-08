@@ -67,16 +67,18 @@
             <div class="text-2xl font-bold text-slate-900">
                 Bridgeway <span class="text-blue-600">ERP Solutions</span>
             </div>
-            <div class="hidden md:flex space-x-12"> 
-                <a href="#challenge" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">The Challenge</a>
-                <a href="#approach" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Our Approach</a>
-                <a href="#plan" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">The Plan</a>
-                <a href="#impact" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">The Impact</a>
-                <a href="#investment" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Investment</a>
+            <div class="hidden md:flex items-center">
+                <div class="flex space-x-12 mr-8"> 
+                    <a href="#challenge" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">The Challenge</a>
+                    <a href="#approach" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Our Approach</a>
+                    <a href="#plan" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">The Plan</a>
+                    <a href="#impact" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">The Impact</a>
+                    <a href="#investment" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Investment</a>
                 </div>
-            <a href="#schedule-meeting" class="hidden md:inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Next Steps
-            </a>
+                <a href="#schedule-meeting" class="hidden md:inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Next Steps
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -315,8 +317,29 @@
         <section id="schedule-meeting" class="py-16 md:py-24 bg-blue-900 text-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Schedule Our Discussion?</h2>
-                <p class="text-lg text-blue-200 max-w-2xl mx-auto mb-8">Please select your preferred date and time from the calendar below. We look forward to connecting with you!</p>
+                <p class="text-lg text-blue-200 max-w-2xl mx-auto mb-8">Please provide your details and select a preferred date and time from the calendar below. We look forward to connecting with you!</p>
                 
+                <form id="user-details-form" class="max-w-lg mx-auto space-y-4 mb-8 text-left">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="first-name" class="block text-sm font-medium text-blue-200">First Name</label>
+                            <input type="text" id="first-name" name="first-name" required class="mt-1 block w-full bg-blue-800 border-blue-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="last-name" class="block text-sm font-medium text-blue-200">Last Name</label>
+                            <input type="text" id="last-name" name="last-name" required class="mt-1 block w-full bg-blue-800 border-blue-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-blue-200">Email Address</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full bg-blue-800 border-blue-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="company" class="block text-sm font-medium text-blue-200">Organization / Company Name</label>
+                        <input type="text" id="company" name="company" required class="mt-1 block w-full bg-blue-800 border-blue-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </form>
+
                 <p class="text-blue-100 text-sm mb-4 max-w-lg mx-auto">Use the arrows next to the month name to navigate through the next 12+ months and select your ideal time.</p>
 
                 <div id="calendar-container" class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
@@ -324,15 +347,14 @@
                 </div>
 
                 <p id="selected-datetime" class="mt-6 text-xl text-blue-100 font-semibold"></p>
-                <button id="confirm-meeting-btn" class="mt-8 bg-blue-600 text-white font-bold px-8 py-4 rounded-lg hover:bg-blue-700 transition-transform hover:scale-105 opacity-50 cursor-not-allowed" disabled>
+                <button id="confirm-meeting-btn" class="mt-8 bg-blue-600 text-white font-bold px-8 py-4 rounded-lg opacity-50 cursor-not-allowed" disabled>
                     Confirm Selected Time
                 </button>
 
                 <div id="meeting-confirmation" class="hidden mt-8 p-6 bg-green-500 rounded-lg shadow-md max-w-md mx-auto text-white">
                     <h3 class="text-2xl font-bold mb-2">Appointment Scheduled!</h3>
-                    <p class="text-lg mb-4">Your meeting has been tentatively scheduled for:</p>
+                    <p class="text-lg mb-4">Your meeting has been tentatively scheduled. A confirmation email with details will be sent shortly to the provided address.</p>
                     <p id="confirmed-datetime-display" class="text-xl font-semibold mb-4"></p>
-                    <p class="text-sm">A confirmation email with details will be sent shortly. We look forward to speaking with you!</p>
                     <button id="dismiss-confirmation-btn" class="mt-4 bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors">
                         Dismiss
                     </button>
@@ -360,7 +382,6 @@
                     const arrow = button.querySelector('span');
                     const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-                    // Close all other accordions
                     document.querySelectorAll('.challenge-item button').forEach(otherButton => {
                         if (otherButton !== button) {
                             otherButton.setAttribute('aria-expanded', 'false');
@@ -369,13 +390,11 @@
                         }
                     });
 
-                    // Toggle current accordion
                     if (isExpanded) {
                         content.style.maxHeight = null;
                         arrow.style.transform = 'rotate(0deg)';
                         button.setAttribute('aria-expanded', 'false');
                     } else {
-                        // Use requestAnimationFrame for smoother transition
                         requestAnimationFrame(() => {
                             content.style.maxHeight = content.scrollHeight + "px";
                             arrow.style.transform = 'rotate(180deg)';
@@ -387,67 +406,40 @@
 
             // Phase Navigation
             const phaseButtons = document.querySelectorAll('.phase');
-            const phaseContents = document.querySelectorAll('.phase-content');
-            
-            let currentActivePhaseButton = document.querySelector('.phase.active');
-            let currentActivePhaseContent = document.querySelector('.phase-content.active');
-
             phaseButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const phaseNum = button.dataset.phase;
                     const targetContent = document.getElementById(`phase-${phaseNum}-content`);
-
-                    // Remove active from previous button and content
-                    if (currentActivePhaseButton) {
-                        currentActivePhaseButton.classList.remove('active');
-                    }
-                    if (currentActivePhaseContent) {
-                        currentActivePhaseContent.classList.remove('active');
-                    }
-
-                    // Add active to new button and content
+                    document.querySelector('.phase.active').classList.remove('active');
+                    document.querySelector('.phase-content.active').classList.remove('active');
                     button.classList.add('active');
                     targetContent.classList.add('active');
-
-                    // Update current active references
-                    currentActivePhaseButton = button;
-                    currentActivePhaseContent = targetContent;
                 });
             });
 
             // Nav link active state on scroll
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-
-            const observerOptions = {
-                rootMargin: "-50% 0px -50% 0px" // Adjusted to trigger when section is roughly in the middle
-            };
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Remove active from all nav links
                         navLinks.forEach(link => {
                             link.classList.remove('active');
-                            link.removeAttribute('aria-current'); // Remove aria-current
+                            link.removeAttribute('aria-current');
                         });
-                        // Add active to the current section's nav link
                         const currentNavLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
                         if (currentNavLink) {
                             currentNavLink.classList.add('active');
-                            currentNavLink.setAttribute('aria-current', 'page'); // Add aria-current
+                            currentNavLink.setAttribute('aria-current', 'page');
                         }
                     }
                 });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+            sections.forEach(section => observer.observe(section));
 
             // Chart.js Radar Chart
             const ctx = document.getElementById('impactChart');
-            if(ctx) { // Check if canvas element exists before initializing chart
+            if(ctx) {
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
@@ -460,133 +452,141 @@
                         ],
                         datasets: [{
                             label: 'Impact of Partnership',
-                            data: [90, 85, 95, 80, 88],
+                            data: [98, 95, 100, 92, 96], // Increased values to extend points
                             fill: true,
-                            backgroundColor: 'rgba(37, 99, 235, 0.2)', // blue-600 with opacity
-                            borderColor: 'rgb(37, 99, 235)', // blue-600
+                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                            borderColor: 'rgb(37, 99, 235)',
                             pointBackgroundColor: 'rgb(37, 99, 235)',
                             pointBorderColor: '#fff',
                             pointHoverBackgroundColor: '#fff',
                             pointHoverBorderColor: 'rgb(37, 99, 235)'
-                        }] // This was the missing closing bracket for datasets
-                    }, // This was the missing closing bracket for data
+                        }]
+                    },
                     options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        elements: {
-                            line: {
-                                borderWidth: 3
-                            }
+                        layout: {
+                            padding: 15 // Adds padding to prevent labels from being cut off
                         },
                         scales: {
                             r: {
-                                angleLines: {
-                                    color: 'rgba(100, 116, 139, 0.3)' // slate-400 with opacity
-                                },
-                                grid: {
-                                    color: 'rgba(100, 116, 139, 0.3)' // slate-400 with opacity
-                                },
+                                beginAtZero: true,
+                                max: 100,
+                                angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                                grid: { color: 'rgba(0, 0, 0, 0.1)' },
                                 pointLabels: {
-                                    color: '#1e293b', // slate-800
-                                    font: {
-                                        size: 14,
-                                        weight: 'bold'
-                                    }
+                                    font: { size: 14 },
+                                    color: '#1e293b'
                                 },
                                 ticks: {
-                                    display: false, // Hide the ticks values
-                                    beginAtZero: true,
-                                    max: 100 // Set maximum value for the scale
+                                    backdropColor: 'rgba(255, 255, 255, 0)',
+                                    stepSize: 25
                                 }
                             }
                         },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'top',
-                                labels: {
-                                    color: '#1e293b' // slate-800
-                                }
-                            }
-                        }
+                        plugins: { legend: { display: false } }
                     }
                 });
             }
 
-            // Flatpickr Calendar for meeting scheduling
-            const meetingCalendarInput = document.getElementById('meeting-calendar');
+            // --- Meeting Scheduler Logic ---
+            const confirmBtn = document.getElementById('confirm-meeting-btn');
+            const userForm = document.getElementById('user-details-form');
+            const formInputs = userForm.querySelectorAll('input');
             const selectedDatetimeDisplay = document.getElementById('selected-datetime');
-            const confirmMeetingBtn = document.getElementById('confirm-meeting-btn');
-            const meetingConfirmationDiv = document.getElementById('meeting-confirmation');
+            const confirmationDiv = document.getElementById('meeting-confirmation');
             const confirmedDatetimeDisplay = document.getElementById('confirmed-datetime-display');
-            const dismissConfirmationBtn = document.getElementById('dismiss-confirmation-btn');
+            const dismissBtn = document.getElementById('dismiss-confirmation-btn');
+            let flatpickrInstance;
 
-            let selectedDateTime = null; // To store the selected date and time
+            function validateAndEnableButton() {
+                const isDateSelected = flatpickrInstance && flatpickrInstance.selectedDates.length > 0;
+                const isFormValid = Array.from(formInputs).every(input => input.value.trim() !== '');
 
-            const fp = flatpickr(meetingCalendarInput, {
-                inline: true, // Display the calendar inline
-                minDate: "today",
+                if (isDateSelected && isFormValid) {
+                    confirmBtn.disabled = false;
+                    confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    confirmBtn.classList.add('hover:bg-blue-700', 'transition-colors', 'hover:scale-105');
+                } else {
+                    confirmBtn.disabled = true;
+                    confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    confirmBtn.classList.remove('hover:bg-blue-700', 'transition-colors', 'hover:scale-105');
+                }
+            }
+
+            flatpickrInstance = flatpickr("#meeting-calendar", {
+                inline: true,
                 enableTime: true,
-                dateFormat: "Y-m-d H:i",
-                altInput: true,
-                altFormat: "F j, Y h:i K", // e.g., "July 8, 2025 10:30 AM"
-                minuteIncrement: 30,
-                // Disable dates in the past (already handled by minDate: "today")
-                // You can add more complex disable logic here if needed, e.g., for weekends or holidays
+                minDate: "today",
+                dateFormat: "F j, Y at h:i K",
                 onChange: function(selectedDates, dateStr, instance) {
                     if (selectedDates.length > 0) {
-                        selectedDateTime = selectedDates[0];
-                        selectedDatetimeDisplay.textContent = `You selected: ${dateStr}`;
-                        confirmMeetingBtn.disabled = false;
-                        confirmMeetingBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                        confirmMeetingBtn.classList.add('hover:bg-blue-700', 'hover:scale-105');
+                        selectedDatetimeDisplay.textContent = `Selected: ${dateStr}`;
                     } else {
                         selectedDatetimeDisplay.textContent = '';
-                        confirmMeetingBtn.disabled = true;
-                        confirmMeetingBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                        confirmMeetingBtn.classList.remove('hover:bg-blue-700', 'hover:scale-105');
                     }
-                },
-                onOpen: function(selectedDates, dateStr, instance) {
-                    // This is optional, but helps ensure the calendar is fully visible in its container
-                    // if it was initially hidden or its container dynamically resized.
-                    instance.calendarContainer.style.maxWidth = '100%';
+                    validateAndEnableButton();
                 }
             });
 
-            confirmMeetingBtn.addEventListener('click', () => {
-                if (selectedDateTime) {
-                    confirmedDatetimeDisplay.textContent = fp.altInput.value; // Use the formatted date string
-                    meetingConfirmationDiv.classList.remove('hidden');
-                    // Optionally hide the calendar and main button after confirmation
-                    meetingCalendarInput.closest('#calendar-container').classList.add('hidden');
-                    confirmMeetingBtn.classList.add('hidden');
-                    selectedDatetimeDisplay.classList.add('hidden');
-                }
+            formInputs.forEach(input => input.addEventListener('input', validateAndEnableButton));
+
+            confirmBtn.addEventListener('click', () => {
+                const selectedDate = flatpickrInstance.selectedDates[0];
+                if (!selectedDate || !Array.from(formInputs).every(input => input.value.trim() !== '')) return;
+
+                const formData = new FormData(userForm);
+                const firstName = formData.get('first-name');
+                const email = formData.get('email');
+                const selectedDateFormatted = flatpickr.formatDate(selectedDate, "F j, Y at h:i K");
+
+                // --- BACKEND INTEGRATION REQUIRED ---
+                // In a real application, you would now take the form data and the selected date
+                // and send it to your backend server via an API call (e.g., using fetch()).
+                // The server would then handle validating the data and sending the confirmation email.
+                //
+                // Example of what the server-side call might look like:
+                //
+                // const payload = {
+                //     firstName: firstName,
+                //     lastName: formData.get('last-name'),
+                //     email: email,
+                //     company: formData.get('company'),
+                //     meetingTime: selectedDate.toISOString()
+                // };
+                //
+                // fetch('/api/schedule-meeting', { 
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(payload) 
+                // })
+                // .then(response => response.json())
+                // .then(data => {
+                //     // Handle success from server
+                //     console.log('Meeting scheduled:', data);
+                // })
+                // .catch(error => {
+                //     // Handle error from server
+                //     console.error('Scheduling failed:', error);
+                // });
+                //
+                // For this frontend-only demo, we will just simulate success by showing the confirmation message.
+                // --- END OF NOTE ---
+
+                confirmedDatetimeDisplay.textContent = `Time: ${selectedDateFormatted}`;
+                confirmationDiv.classList.remove('hidden');
+                confirmBtn.classList.add('hidden');
+                selectedDatetimeDisplay.classList.add('hidden');
             });
 
-            dismissConfirmationBtn.addEventListener('click', () => {
-                meetingConfirmationDiv.classList.add('hidden');
-                // Reset to show calendar and button again for a new selection
-                meetingCalendarInput.closest('#calendar-container').classList.remove('hidden');
-                confirmMeetingBtn.classList.remove('hidden', 'opacity-50', 'cursor-not-allowed');
-                confirmMeetingBtn.disabled = true; // Disable until a new date is selected
+            dismissBtn.addEventListener('click', () => {
+                confirmationDiv.classList.add('hidden');
+                confirmBtn.classList.remove('hidden');
                 selectedDatetimeDisplay.classList.remove('hidden');
-                selectedDatetimeDisplay.textContent = '';
-                // Clear selected date in flatpickr instance
-                fp.clear();
-            });
-
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
+                userForm.reset();
+                flatpickrInstance.clear();
+                validateAndEnableButton();
             });
         });
     </script>
+
 </body>
 </html>
