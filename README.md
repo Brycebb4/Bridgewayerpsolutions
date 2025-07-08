@@ -443,16 +443,17 @@
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
+                        // Using multi-line labels to prevent text from being cut off
                         labels: [
-                            'Technology ROI',
-                            'Operational Efficiency',
-                            'User Proficiency',
-                            'Strategic Clarity',
-                            'Business Agility'
+                            ['Technology', 'ROI'],
+                            ['Operational', 'Efficiency'],
+                            ['User', 'Proficiency'],
+                            ['Strategic', 'Clarity'],
+                            ['Business', 'Agility']
                         ],
                         datasets: [{
                             label: 'Impact of Partnership',
-                            data: [98, 95, 100, 92, 96], // Increased values to extend points
+                            data: [98, 95, 100, 92, 96],
                             fill: true,
                             backgroundColor: 'rgba(37, 99, 235, 0.2)',
                             borderColor: 'rgb(37, 99, 235)',
@@ -463,8 +464,9 @@
                         }]
                     },
                     options: {
+                        // Added more padding to ensure labels fit
                         layout: {
-                            padding: 15 // Adds padding to prevent labels from being cut off
+                            padding: 20
                         },
                         scales: {
                             r: {
@@ -477,7 +479,7 @@
                                     color: '#1e293b'
                                 },
                                 ticks: {
-                                    backdropColor: 'rgba(255, 255, 255, 0)',
+                                    display: false, // Hiding the 25, 50, 75, 100 ticks for a cleaner look
                                     stepSize: 25
                                 }
                             }
